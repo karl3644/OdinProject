@@ -1,0 +1,41 @@
+body { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #cedee7;
+}
+
+p {
+    color: #213743;
+}
+
+h2 {
+    color: #213743;
+}
+
+h3 {
+    color: #213743;
+}
+
+#results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    background-color: #477791;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5%;
+    font-size: 1.1em;
+}
+
+button:hover {
+    color: #477791;
+    background-color: white;
+}

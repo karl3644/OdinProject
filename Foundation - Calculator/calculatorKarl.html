@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <h1>.JS Calculator</h1>
+
+
+
+    <div id="calcContainer">
+        <div id="calcDisplay">
+                <span id="calcDisplayP"></span><span id="cursor">|</span>
+                <!-- <span id="operatorDisplay"></span></span> -->
+        </div>
+
+        <div id="buttonContainer">
+            <button id="clear" data-key="27">C</button>
+            <button id="÷" data-key="111">÷</button>
+            <button id="✕" data-key="106">✕</button>
+            <button id="delete" data-key="8">Del</button>       
+            <button id="7" data-key="103">7</button>
+            <button id="8" data-key="104">8</button>
+            <button id="9" data-key="105">9</button>
+            <button id="-" data-key="109">-</button>
+            <button id="4" data-key="100">4</button>
+            <button id="5" data-key="101">5</button>
+            <button id="6" data-key="102">6</button>
+            <button id="+" data-key="107">+</button>
+            <button id="1" data-key="97">1</button>
+            <button id="2" data-key="98">2</button>
+            <button id="3" data-key="99">3</button>
+            <button style="height: 200%;" id="equals" data-key="13">=</button>
+            <button id="test">test</button>
+            <button id="0" data-key="96">0</button>
+            <button id="." data-key="110">.</button>
+            
+        </div>
+    </div>
+
+    <ul>
+        <li>Includes keypad functionality. Make sure Num Lock is on</li>
+        <li>Escape = C</li>
+        <li>Backspace = Del
+    </ul>
+
+  <script>
+
+    // ** to do **
+    // put comma in per 1,000 - currentInput2 works but commas cannot be used in operation
+    // button instructions on the html
+    // make look nice
+    // dark mode?
+
+    var cursor = true;
+    var speed = 500;
+
+    setInterval(() => {
+        if(cursor) {
+            document.getElementById('cursor').style.opacity = 0;
+            cursor = false;
+        } else {
+            document.getElementById('cursor').style.opacity = 1;
+            cursor = true;
+        }
+    }, speed);
+
+    let operatorType = "";
+    let currentInput = "";
+    let no1 = "";
+    let no2 = "";    
+
+    // function works to change string to have commas. operator doesnt work if it includes commas though
+    function currentInput2(x) {
+        return parseFloat(currentInput).toLocaleString('en');
+    } 
+    
+
+    const testing = () => {
+        console.log("operator: " + operatorType);
+        console.log("current input: "+ currentInput);
+        console.log("no1: "+ no1);
+        console.log("no2: "+ no2);
+    }
+
+    const displayFunction = () => { // function for handling DISPLAY
+        return document.getElementById('calcDisplayP').textContent = `${no1} ${operatorType} ${currentInput}`;
+    }
+    
+    const numberInputs = (e) => { // function for handling NUMBER inputs
+        
+        if (no1 && !operatorType) {
+            no1 = "";
+            currentInput += e;
+        } else {
+            currentInput += e;
+        }
+
+
+    }
+
+    const operatorInputs = (e) => { // function for handling OPERATOR inputs
+        if (!currentInput && !operatorType && !no1) { // operator is pressed first
+            operatorType = "";
+        } else if (no1 && operatorType && e === "-") { // used for minus calculation after operator
+            if (/\-/.test(currentInput) || operatorType === "-") {
+                return;
+            } else {
+                currentInput += "-";
+            }
+        } else if (no1 && operatorType && !currentInput) { // operator pressed twice in succession and no currentinput
+            operatorType = e;
+        } else if(no1 && operatorType && currentInput) { // number > operator > number > operator
+            if (currentInput === "-" || currentInput === "+" || currentInput === "/" || currentInput === "✕" || currentInput === "÷") {
+                return;
+            } else {
+                equalsFunc();
+                operatorType = e;
+            }            
+        } else if (operatorType === "-" && currentInput) {
+            no1 = "-"+currentInput;
+            currentInput = "";
+            operatorType = e;
+        } else if (no1) { // used for checking if a calculation is already in place, or when del is used
+            if (no1 === "NaN" || no1 === "Cannot divide by 0") {
+                no1 = "";
+            } else {
+            operatorType = e;
+            currentInput = ""; // is this needed?
+            }
+        } else {
+            operatorType = e;
+            no1 = currentInput;
+            currentInput = "";
+        } 
+    }    
+
+    const equalsFunc = () => {
+
+        if ((no1 === "0" && operatorType === "÷") || (currentInput === "0" && operatorType === "÷") || (no1 === "0" && currentInput === "0" && operatorType === "÷")) {
+            no1 = "Cannot divide by 0";
+            currentInput = "";
+            operatorType = "";
+        } else {
+            no2 = currentInput;
+            no1 = (operate(operatorType, Number(no1), Number(no2)));
+            no1 = +no1.toFixed(5);
+            no1 = no1.toString();
+            no2 = "";
+            currentInput = "";
+            operatorType = "";
+        }
+    }
+
+
+    window.addEventListener('keydown', function(e) {
+
+        // console.log(e.keyCode);
+
+        const button = document.querySelector(`button[data-key="${e.keyCode}"]`);
+        if(!button) return;
+        button.classList.add('playing');
+
+        let buttonInput = e.key;
+
+        switch (buttonInput){
+                
+                case "0":
+                if (currentInput[0] === "0" && currentInput.length === 1) {
+                    break;
+                } else {
+                   numberInputs(e.key); 
+                }                
+                break;
+
+                case "1":
+                numberInputs(e.key);
+                break;
+
+                case "2":
+                numberInputs(e.key);
+                break;
+
+                case "3":
+                numberInputs(e.key);
+                break;
+
+                case "4":
+                numberInputs(e.key);
+                break;
+
+                case "5":
+                numberInputs(e.key);
+                break;
+
+                case "6":
+                numberInputs(e.key);
+                break;
+
+                case "7":
+                numberInputs(e.key);
+                break;
+
+                case "8":
+                numberInputs(e.key);
+                break;
+
+                case "9":
+                numberInputs(e.key);
+                break;
+
+                case ".": 
+                if (no1 && !operatorType) {
+                    no1 = "";
+                    currentInput += ".";
+                } else if (!/\./.test(currentInput)) { // regex prevents 2 decimals input
+                    currentInput += ".";
+                }
+                break;
+
+                case "+":
+                operatorInputs(e.key);
+                break;
+
+                case "-":
+                if (!currentInput && !operatorType) { // used for negative calculations
+                    operatorType = e.key;
+                } 
+                operatorInputs(e.key);
+                break;
+
+                case "*":
+                operatorInputs("✕");
+                break;
+
+                case "/":
+                operatorInputs("÷");
+                break;
+
+                case "Enter":
+                if (no1 && operatorType && currentInput){
+                    equalsFunc();                    
+                }
+                break;
+
+                case "Backspace":
+                if (no1 && operatorType && currentInput) {
+                    currentInput = currentInput.slice(0, -1);
+                } else if (no1 && operatorType) {
+                    operatorType = "";
+                } else if (no1 === "NaN" || no1 === "Cannot divide by 0") {
+                    no1 = "";
+                } else if (no1) {
+                    no1 = no1.slice(0, -1);
+                } else {
+                    currentInput = currentInput.slice(0, -1);
+                }
+                break;
+
+                case "Escape":
+                operatorType = "";
+                currentInput = "";
+                no1 = "";
+                no2 = "";
+                break;
+            }  
+            displayFunction(); 
+    });
+
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.addEventListener('transitionend', removeTransition));
+
+    function removeTransition(e) {
+        if(e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
+    }    
+
+    const mouseSelection = Array.from(document.querySelectorAll('button'));
+    mouseSelection.forEach((button) => {
+
+        button.addEventListener('click', function(e) {
+
+            let clickInput = e.target.id;
+            
+            switch (clickInput){
+                
+                case "0":
+                if (currentInput[0] === "0" && currentInput.length === 1) {
+                    break;
+                } else {
+                   numberInputs(e.target.id); 
+                }
+                break;
+
+                case "1":
+                numberInputs(e.target.id);
+                break;
+
+                case "2":
+                numberInputs(e.target.id);
+                break;
+
+                case "3":
+                numberInputs(e.target.id);
+                break;
+
+                case "4":
+                numberInputs(e.target.id);
+                break;
+
+                case "5":
+                numberInputs(e.target.id);
+                break;
+
+                case "6":
+                numberInputs(e.target.id);
+                break;
+
+                case "7":
+                numberInputs(e.target.id);
+                break;
+
+                case "8":
+                numberInputs(e.target.id);
+                break;
+
+                case "9":
+                numberInputs(e.target.id);
+                break;
+
+                case ".": 
+                if (no1 && !operatorType) {
+                    no1 = "";
+                    currentInput += ".";
+                } else if (!/\./.test(currentInput)) {
+                    currentInput += ".";
+                }
+                break;
+
+                case "test":
+                testing();
+                break;
+
+                case "+":
+                operatorInputs(e.target.id);
+                break;
+
+                case "-":
+                if (!currentInput && !operatorType) { // used for negative calculations
+                    operatorType = e.target.id;
+                }
+                operatorInputs(e.target.id);
+                break;
+
+                case "✕":
+                operatorInputs(e.target.id);
+                break;
+
+                case "÷":
+                operatorInputs(e.target.id);
+                break;
+
+                case "equals":
+                if (no1 && operatorType && currentInput){
+                    equalsFunc();                    
+                }
+                break;
+
+                case "delete":
+                if (no1 && operatorType && currentInput) {
+                    currentInput = currentInput.slice(0, -1);
+                } else if (no1 && operatorType) {
+                    operatorType = "";
+                } else if (no1 === "NaN" || no1 === "Cannot divide by 0") {
+                    no1 = "";
+                } else if (no1) {
+                    no1 = no1.slice(0, -1);
+                } else {
+                    currentInput = currentInput.slice(0, -1);
+                }
+                break;
+
+                case "clear":
+                operatorType = "";
+                currentInput = "";
+                no1 = "";
+                no2 = "";
+                break;
+            
+            };
+            displayFunction();
+        });
+
+        
+    });
+
+    function operate(operator, no1, no2){
+        if (operator === "+"){
+            return add(no1, no2);
+        } else if (operator === "-"){
+            return subtract(no1, no2);
+        } else if (operator === "✕" || operator === "*"){
+            return multiply(no1, no2);
+        } else if (operator === "÷" || operator === "/"){
+            return divide(no1, no2);
+        }          
+    };
+
+    function add(no1, no2){
+        return no1 + no2;
+    };
+
+    function subtract(no1, no2){
+        return no1 - no2;
+    };
+
+    function multiply(no1, no2){
+        return no1 * no2;
+    };
+
+    function divide(no1, no2){
+        return no1 / no2;
+    };
+
+    
+    
+
+  </script>
+</body>
+
+</html>

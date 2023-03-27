@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.css" />
+    <title>Document</title>
+    <!-- <script src="./script.js" defer></script> -->
+  </head>
+  <body>
+    <div class="pageContainer">
+      <div class="imgContainer">
+        <div class="leftPic flexCol">
+          <header>
+            <img src="/assetts/imgs/odin-lined.png" alt="logo" class="logo" />
+            <p class="logoHeader">ODIN Form</p>
+          </header>
+          <footer class="waterMark">
+            photo by <u>Halie West</u> on <u>Unsplash</u>
+          </footer>
+        </div>
+      </div>
+      <main>
+        <div class="textContent">
+          <p>
+            This is not a real online service! You know you need something like
+            this in your life to help you realize you deepest dreams. Sign up
+            <i>now</i> to get started.
+          </p>
+          <br />
+          <p>You <i>know</i> you want to.</p>
+        </div>
+        <form action="">
+          <p class="formHeader">Let's do this!</p>
+          <div class="formItem">
+            <label for="forename">First name</label>
+            <input type="text" id="forename" name="forename" />
+          </div>
+          <div class="formItem">
+            <label for="surname">Last name</label>
+            <input type="text" id="surname" name="surname" />
+          </div>
+          <div class="formItem">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" />
+          </div>
+
+          <div class="formItem">
+            <label for="phone">Phone number</label>
+            <input type="text" id="phone" name="phone" />
+          </div>
+
+          <div class="formItem">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" />
+            <div id="passwordError" class="passwordErrorTextInactive">
+              *Passwords do not match
+            </div>
+          </div>
+          <div class="formItem">
+            <label for="confirmPassword">Confirm password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+            />
+          </div>
+        </form>
+        <div class="submitSection">
+          <button type="button" onclick="toggleClass()" class="createAccount">
+            Create account
+          </button>
+          <p>Already have an account? <a href="">Log in</a></p>
+        </div>
+      </main>
+    </div>
+    <script>
+      function toggleClass() {
+        const password = document.getElementById("password");
+        const passwordConfirm = document.getElementById("confirmPassword");
+        const passwordError = document.getElementById("passwordError");
+
+        if (password.value === passwordConfirm.value) {
+          // console.log("PW match");
+          password.classList.remove("inputError");
+          passwordConfirm.classList.remove("inputError");
+          passwordError.classList.add("passwordErrorTextInactive");
+        } else {
+          password.classList.add("inputError");
+          passwordConfirm.classList.add("inputError");
+          passwordError.classList.remove("passwordErrorTextInactive");
+        }
+      }
+    </script>
+  </body>
+</html>

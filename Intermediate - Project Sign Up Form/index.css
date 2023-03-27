@@ -1,0 +1,143 @@
+@font-face {
+  font-family: "Norse-Bold";
+  src: url("/assetts/fonts/Norse-Bold.otf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.logoHeader {
+  font-family: "Norse-Bold";
+  font-size: 3rem;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.pageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+main {
+  box-sizing: border-box;
+  width: 60%;
+  /* padding: 20px; */
+  background-color: #fffbf7;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: white;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 20vh 0 0 0;
+}
+
+.logo {
+  height: 80%;
+}
+
+.imgContainer {
+  width: 40%;
+  z-index: 2;
+}
+
+.waterMark {
+  display: block;
+  color: white;
+  text-align: center;
+  margin: auto 0 0 0;
+  padding: 0 0 10px 0;
+  font-size: 0.8rem;
+}
+
+.leftPic {
+  background-image: url(/assetts/imgs/halie-west-bTzpau9mKT4-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.textContent {
+  padding: 15vh 20px 10vh;
+  font-weight: bold;
+}
+
+.formHeader {
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.formItem {
+  display: inline-flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 0 10px 10px 0;
+}
+
+form {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 10px 25px -15px rgb(0 0 0 / 20%);
+}
+
+form label {
+  font-size: 0.8rem;
+}
+
+.submitSection {
+  padding: 20px;
+}
+
+.createAccount {
+  background-color: #596d48;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 30px;
+  margin: 0 0 20px 0;
+}
+
+input {
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  width: 180px;
+  height: 22px;
+  padding: 0 5px 0 5px;
+}
+
+input:focus {
+  border: 1px solid rgb(0, 140, 255);
+  border-radius: 3px;
+  outline: none;
+  box-shadow: 2px 2px 7px rgb(216, 216, 216);
+}
+
+#passwordError {
+  color: red;
+  font-size: 12px;
+}
+
+.passwordErrorTextInactive {
+  display: none;
+}
+
+.inputError {
+  border: 1px solid red;
+}

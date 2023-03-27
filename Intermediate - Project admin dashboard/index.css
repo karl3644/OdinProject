@@ -1,0 +1,130 @@
+body {
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 1fr 4fr;
+}
+
+aside {
+    background-color: rgb(56, 160, 229);
+    grid-row: 1 / -1;
+    grid-column: 1 / 2;
+}
+
+h1 {
+    margin: 10px;
+}
+
+h4 {
+    margin: 0;
+}
+
+header {
+    grid-row: 1 / 2;
+    grid-column: 2 / -1;
+    
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 80px 80px 80px;
+    align-items: center;
+    justify-items: center;
+}
+
+#search {
+    border-radius: 15px;
+    width: 90%;
+    height: 16px;
+    background-color: rgb(232, 232, 232);
+    border: none;
+}
+
+main {
+    background-color: rgb(232, 232, 232);
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    padding: 0 0 10px 10px;
+    height: 100%;
+}
+
+.projects {
+    display: grid;
+    grid-template-rows: 40px 500px;
+
+}
+
+#projects {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+#announcementsTrending {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    display: grid;
+    grid-template-rows: 40px 1fr 50px 1fr;
+    height: 540px;
+}
+
+.projectTitle {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+}
+
+.h3Margins {
+    margin: 10px 0 0 0;
+}
+
+#projects > div, .atBlock {
+    background-color: white;
+}
+
+.atBlock {
+    display: grid;
+    max-height: 250px;
+    grid-template-rows: repeat(3, min(50px, 1fr));
+}
+
+ul {
+    list-style: none;
+}
+
+
+aside * {
+    color: white;
+    text-decoration: none;
+    display: grid;
+    gap: 11px;
+}
+
+.roundedButton {
+    background-color: rgb(56, 160, 229);
+    color: white;
+    border-radius: 15px;
+    border: none;
+    padding: 5px;
+    width: 75px;
+}
+
+
+.tile {
+    border-radius: 5px;
+    padding: 10px;
+    border-left: 5px orange solid;
+}
+
+p {
+    font-size: 12px;
+}
+
+h5 {
+    margin: 0;
+}
