@@ -6,14 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>  
     <script type="module">
-        import {logger} from "./WeatherApp.js"
-        logger()
+        import {} from "./WeatherApp.js"
+        // logger()
+        const hey = "true";
     </script>
 </head>
 <body>
-    body
+
+    <label for="weather-select">Choose weather data:</label>
+    <select name="weather" id="weather-select">
+        <option value="current">current</option>
+        <option value="forecast">forecast</option>
+        <option value="Search">Search</option>
+    </select>
+
+    <label for="airQuality-select">Show air quality?:</label>
+    <select name="airQuality" id="airQuality-select">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>
+    
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location">
+    
     <button id="apiButton">
         get data
     </button>
+
+    <p id="failure" hidden>Error</p>
+    <p id="results">Results</p>
 </body>
 </html>
