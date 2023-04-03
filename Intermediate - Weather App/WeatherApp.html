@@ -13,27 +13,59 @@
 </head>
 <body>
 
-    <label for="weather-select">Choose weather data:</label>
-    <select name="weather" id="weather-select">
-        <option value="current">current</option>
-        <option value="forecast">forecast</option>
-        <option value="Search">Search</option>
-    </select>
+    <div>
+        <label for="weather-select">Choose weather data:</label>
+        <select name="weather" id="weather-select">
+            <option value="current">current</option>
+            <option value="forecast">forecast</option>
+            <option value="Search">Search</option>
+        </select>
+    </div>
 
-    <label for="airQuality-select">Show air quality?:</label>
-    <select name="airQuality" id="airQuality-select">
-        <option value="yes">yes</option>
-        <option value="no">no</option>
-    </select>
+    <div>
+        <label for="airQuality-select">Show air quality?:</label>
+        <select name="airQuality" id="airQuality-select">
+            <option value="yes">yes</option>
+            <option value="no" selected>no</option>
+        </select>
+    </div>
     
-    <label for="location">Location:</label>
-    <input type="text" id="location" name="location">
+    <div>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+    </div>
     
     <button id="apiButton">
-        get data
+        Show weather results
     </button>
 
-    <p id="failure" hidden>Error</p>
-    <p id="results">Results</p>
+    
+    <div id="results">
+        <div style="height: 50px">
+            <p id="failure" hidden>Error</p>
+            <p id="loading" hidden>Loading...</p>
+        </div>
+        <h2>Location</h2>
+        <div id="locationContainerSuccess">
+            <p>Name: <span id="locationName"></span></p>
+            <p>Country: <span id="locationCountry"></span></p>
+            <p>Region: <span id="locationRegion"></span></p>
+            <p>Coordinates: <span id="locationCoord"></span></p>
+        </div>
+        <h2>Weather data</h2>
+        <div id="resultsContainerSuccess">
+            <p>Temp C: <span id="tempCResult"></span></p>
+            <p>Temp F: <span id="tempFResult"></span></p>
+            <p>Humidity: <span id="humidityResult"></span></p>
+            <p>Wind Mph: <span id="windMPHResult"></span></p>
+            <p>Wind degree: <span id="windDegreeResult"></span></p>
+            <p>Wind direction: <span id="windDirectionResult"></span></p>
+            <p>Feels like C: <span id="feelsLikeCResult"></span></p>
+            <p>Feels like F: <span id="feelsLikeFResult"></span></p>
+            <p>Pressure mb: <span id="pressureMBResult"></span></p>
+            <p>Precipitation mm: <span id="precipitationMMResult"></span></p>
+            <p>UV index: <span id="uvResult"></span></p>
+        </div>
+    </div>
 </body>
 </html>
