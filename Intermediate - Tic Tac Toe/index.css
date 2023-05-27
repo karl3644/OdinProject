@@ -4,15 +4,10 @@
 }
 
 .grid {
-  padding: 200px 0 0 0;
-  margin: auto;
+  margin: 200px auto auto auto;
   display: grid;
   width: 300px;
   height: 300px;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-}
-
-.cell {
-  outline: 1px solid black;
+  border: 1px black solid;
 }
