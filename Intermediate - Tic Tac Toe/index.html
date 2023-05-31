@@ -9,11 +9,31 @@
     <script defer src="index.js"></script>
   </head>
   <body>
-    <!-- add players -->
-    <!-- add whos turn it is -->
-    <!-- add if it is 0 or X to go next -->
-    <!-- add what turn it is -->
-    <!-- add total score -->
+    <div>
+      <p>Player 1</p>
+      <p>Score: <span id="p1Score">0</span></p>
+      <p>Symbol: <span id="p1Symbol">X</span></p>
+      <p>current turn = <span id="p1Turn">true</span></p>
+    </div>
+
+    <br />
+
+    <div>
+      <p>Player 2</p>
+      <p>Score: <span id="p2Score">1</span></p>
+      <p>Symbol: <span id="p2Symbol">O</span></p>
+      <p>current turn = <span id="p2Turn">false</span></p>
+    </div>
+
+    <br />
+
+    <button id="openDialog">open dialog</button>
+    <button id="closeDialog">close dialog</button>
+    <dialog id="dialog">
+      Enter username
+      <button id="closeDialogTwo">close dialog</button>
+    </dialog>
+
     <div class="grid">
       <button class="cell" id="one"></button>
       <button class="cell" id="two"></button>

@@ -1,18 +1,33 @@
 // module
 // use to control init game, turns, testing for winner
 const gameBoard = (() => {
-  const gameBoard = ["x", "x", "y", "", "y", "", "", "", ""];
+  const gameBoard = ["", "", "", "", "", "", "", "", ""];
   let turn;
+  const openButton = document.getElementById("openDialog");
+  const closeButton = document.getElementById("closeDialog");
+  const closeButtonTwo = document.getElementById("closeDialogTwo");
 
+  openButton.addEventListener("click", () => {
+    dialog.showModal();
+  });
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+  });
+  closeButtonTwo.addEventListener("click", () => {
+    dialog.close();
+  });
   // getUserName()
 
   const decideInitialSymbol = () => {
     // if turn undefined the game has just started
+    console.log(turn);
     if (turn === undefined) {
       Math.round(Math.random()) === 0 ? (turn = "O") : (turn = "X");
     }
-    return { turn };
+    // console.log(turn);
+    // return { turn };
   };
+  console.log(turn);
 
   const decidePlayerSymbol = () => {
     let playerOneSymbol = "X";
@@ -24,7 +39,9 @@ const gameBoard = (() => {
     return { playerOneSymbol, playerTwoSymbol };
   };
 
-  const firstPlayer = () => {
+  const decideInitialTurn = () => {};
+
+  const handlePlayerTurn = () => {
     if (decideInitialSymbol().turn === decidePlayerSymbol().playerOneSymbol) {
       // playerOne = 1;
       // playerTwo = 2;
@@ -42,28 +59,28 @@ const gameBoard = (() => {
   // const initGame = () => {}
   // getUserInput(name)
   // decideInitialSymbol
-  // decide player turn
+  // handlePlayerTurn
 
   return {
+    turn,
     gameBoard,
     decidePlayerSymbol,
     decideInitialSymbol,
     swapSymbol,
-    firstPlayer,
   };
 })();
+
 // module
 // only use for taking user input and updating the UI
 const displayController = (() => {
   const allCells = Array.from(document.querySelectorAll(".cell"));
 
-  const clickHandlerBoard = () => {
-    allCells.forEach((cell) => {
-      cell.addEventListener("click", () => {
-        console.log(cell.id);
-      });
+  allCells.forEach((cell, index) => {
+    cell.addEventListener("click", () => {
+      console.log(gameBoard.turn);
+      gameBoard.gameBoard[index] = gameBoard.turn;
     });
-  };
+  });
 
   const updateScreen = () => {
     if (allCells.length) {
@@ -73,7 +90,7 @@ const displayController = (() => {
     }
   };
 
-  return { clickHandlerBoard, updateScreen };
+  return { updateScreen };
 })();
 
 // players - multiple. use a factory
@@ -83,8 +100,6 @@ const player = (name, number, symbol) => {
 const playerOne = player("john");
 const playerTwo = player("smith");
 
-// displayController.updateScreen();
-// displayController.clickHandlerBoard();
-// gameBoard.decideInitialSymbol();
-// gameBoard.swapSymbol();
-gameBoard.firstPlayer();
+gameBoard.decideInitialSymbol();
+// gameBoard.decidePlayerSymbol();
+console.log(gameBoard.decideInitialSymbol());
